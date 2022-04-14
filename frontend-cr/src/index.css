@@ -1,0 +1,358 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap');
+*{
+  margin:0px;
+  padding:0px;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+:root{
+  --bgcolor:#f1f5fd;
+  --primary-color:#6f5def;
+  --text-color:#828286;
+  --main-text-color:#333333;
+}
+
+a{
+  text-decoration: none;
+  color:var(--text-color);
+}
+p{
+  color:(var(--text-color));
+}
+li{
+  list-style-type: none;
+}
+/* 
+#loading{
+  position: fixed;
+  width:100%;
+  height: 100vh;
+  background: #fff url()
+} */
+/******************************************Navbar Style Starts ***************************************************************************/
+.wrap-container{
+  max-width: 1300px;
+  margin:auto;
+  padding-left:25px;
+  padding-right:25px;
+}
+.navbar{
+  display: flex;
+  align-items: center;
+  padding:20px;
+}
+
+nav{
+  flex:1;
+  text-align: right;
+  
+}
+nav ul{
+  display: inline-block;
+  list-style-type: none;
+}
+
+nav ul li{
+  display:inline-block;
+  margin-right: 20px;
+  font-weight: bolder;
+}
+.brand-title{
+  font-weight: 1200;
+  font-size: 1.3rem;
+  line-height: 66px;
+  color:#115e12;
+
+}
+
+body{
+  background-color: var(--bgcolor);
+}
+
+
+
+/******************************************Navbar Style Ends ***************************************************************************/
+
+
+
+/******************************************* Header Starts *****************************************************************************/
+
+
+.wrapper-row{
+  display:flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+
+.wrapper-col-1{
+  flex-basis: 40%;
+  min-width:400px;
+}
+
+.wrapper-col-2 img{
+  height:420px;
+  max-width:100%;
+  padding:50px 0px;
+  
+
+}
+
+.wrapper-col-1 h1{
+  font-size: 43px;
+  line-height: 60px;
+  margin:25px 0px;
+}
+
+.wrapper-col-1 p{
+  font-size:20px;
+}
+
+
+.btn:hover{
+  background-color: #563434;
+  color:#FFF;
+}
+header .wrapper-row{
+  margin-top:70px;
+}
+
+/******************************************* Header Ends *****************************************************************************/
+
+
+/******************************************* Usp Starts *******************************************************************************/
+#usp{
+  margin-left: 3%;
+}
+.title{
+  text-align: center;
+  margin:0 auto 80px;
+  position: relative;
+  line-height: 60px;
+  color:var(--text-color)
+}
+.title::after{
+  content : '';
+  background: #ff523b;
+  color:#000;
+  width:80px;
+  height:5px;
+  border-radius: 5px;
+  position:absolute;
+  bottom:0;
+  left:50%;
+  transform: translateX(-50%);
+
+}
+/******************************************* Usp Ends *******************************************************************************/
+
+
+/******************************************* Category Starts *************************************************************************/
+
+
+
+.categories{
+  margin:70px 0;
+}
+
+.wrapper-col-3{
+  flex-basis:30%;
+  min-width: 250px;
+
+}
+
+
+wrapper-col-3 img{
+  width: 100%;
+}
+
+
+.small-container{
+max-width: 1080px;
+margin: auto;
+padding-left: 25px;
+padding-right: 25px;
+}
+/******************************************* Category Ends *************************************************************************/
+
+
+/********************************************Products Start**************************************************************************/
+
+
+.wrapper-col-4{
+  flex-basis:20%;
+  padding:10px;
+  min-width: 200px;
+  margin-bottom: 50px;
+  transition: transform 0.5s;
+}
+
+.wrapper-col-4 img{
+  width:100%;
+
+}
+
+.wrapper-col-4 h4{
+  color:var(--text-color);
+  font-weight: normal;
+  font-size: 20px;
+}
+
+.wrapper-col-4 p{
+  font-size: 14px;
+}
+
+.wrapper-col-4:hover{
+  transform: translateY(-5px);
+}
+
+
+
+/*end*/
+
+footer{
+  background: #c3c4c7;
+  color:#8a8a8a;
+  font-weight: bolder;
+  font-size: 14px;
+  padding:60px 0 20px;
+}
+
+footer h3{
+  color:#000f;
+}
+
+.footer-col-1,
+.footer-col-2,
+.footer-col-3,
+.footer-col-4{
+  min-width: 250px;
+  margin-bottom: 20px;
+}
+
+.footer-col-1{
+  flex-basis: 27%;
+}
+.footer-col-2{
+  flex: 1;
+  text-align: center;
+}
+
+.footer-col-2 img{
+  width:180px;
+  margin-bottom: 20px;
+}
+.footer-col-3,.footer-col-4{
+  flex-basis: 12%;
+  text-align: center;
+}
+
+/* Cart Starts */
+
+.cart-page{
+  margin:  80px auto;
+}
+
+table{
+  width:100%;
+  border-collapse: collapse;
+}
+
+
+.cart-info  {
+  display:flex;
+  flex-wrap:wrap;
+}
+
+.cart-info img{
+  height:80px;
+  width:80px;
+  margin-right: 10px;
+}
+
+
+th{
+  text-align: left;
+  padding:5px;
+  color:#fff;
+  background: #333333;
+  font-weight: normal;
+}
+
+
+td{
+  padding: 10px 5px;
+}
+
+td input{
+  width:40px;
+  height:30px;
+  padding:6px;
+}
+
+td a{
+  color:#333333;
+  font-size: 13px;
+}
+
+.total-price {
+  display: flex;
+  /*justify-content: flex-end;*/
+  margin-left: 60%;
+}
+
+.total-price table {
+  border-top: 3px solid #333333;
+  width: 100%;
+  max-width: 400px;
+}
+
+td:last-child {
+  text-align: right;
+}
+
+th:last-child {
+  text-align: right;
+}
+
+
+
+
+
+
+@media(min-width:280px) and (max-width:319px){
+
+  .empty-img img{
+      height:120px;
+  }
+.display-4 {
+  font-size: 2.5rem!important;
+}
+}
+
+@media(min-width:320px) and (max-width:425px){
+
+  .checkout{
+      display: block;
+  }
+  .small-container{
+  
+  padding:0px;
+  }
+  .empty-img img{
+  height:160px;
+  }
+  .button{
+  width:36%;
+  }
+  }
+
+
+
+
+
+
+
+
