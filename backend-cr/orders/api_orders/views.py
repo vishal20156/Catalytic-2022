@@ -184,18 +184,18 @@ def add_order(request):
 
 
             #Sending message to user that their order is recieved
-            datas = extendedUser.objects.get(user=user)
-            print(datas.phone_no)
-            account_sid = "AC07d653ba1e9c29f6d376a8372acbdb22"
-            auth_token =  "615710f51145b8e96afe101148d9bce6"
-            client = Client(account_sid, auth_token)
+            # datas = extendedUser.objects.get(user=user)
+            # print(datas.phone_no)
+            # account_sid = "AC07d653ba1e9c29f6d376a8372acbdb22"
+            # auth_token =  "615710f51145b8e96afe101148d9bce6"
+            # client = Client(account_sid, auth_token)
 
-            message = client.messages \
-                .create(
-                     body=f"Hey {order.user.first_name} Thankyou for shopping with catalytic rasoi, your order is confirmed with order amount of {order.amount}",
-                     from_='+19087748233',
-                     to=f'+91{datas.phone_no}'
-                 )
+            # message = client.messages \
+            #     .create(
+            #          body=f"Hey {order.user.first_name} Thankyou for shopping with catalytic rasoi, your order is confirmed with order amount of {order.amount}",
+            #          from_='+19087748233',
+            #          to=f'+91{datas.phone_no}'
+            #      )
 
 
             #saving the order to spreadsheet using sheets2api
