@@ -335,7 +335,7 @@ def updateOrderStatus(request):
     # print(user_no)
     srzlr = OrderSerializer(order_to_be_changed,many=False)
     order_to_be_changed.save()
-    pwk.sendwhatmsg_instantly("+91"+str(user_no), "Your order is"+status_choices[order_status], 10, tab_close=True)   
+    # pwk.sendwhatmsg_instantly("+91"+str(user_no), "Your order is"+status_choices[order_status], 10, tab_close=True)   
     # time.sleep(20)
     # keyboard.press_and_release('ctrl+w')
     return Response(srzlr.data)
