@@ -22,6 +22,11 @@ import {
     ORDER_DELIVER_SUCCESS,
     ORDER_DELIVER_FAIL,
     ORDER_DELIVER_RESET,
+    ORDER_STATUS_UPDATE_REQUEST,
+    ORDER_STATUS_UPDATE_SUCCESS,
+    ORDER_STATUS_UPDATE_FAIL,
+    
+    
 } from "../constants/orderConstants";
 
 /* REDUCER USED IN PlaceOrder COMPONENT */
@@ -139,4 +144,20 @@ export const orderListReducer = (state = { orders: [] }, action) => {
             return state;
     }
 };
+
+
+
+
+export const orderUpdateReducer = (state = { },action) => {
+    switch(action.type){
+        case ORDER_STATUS_UPDATE_REQUEST :
+            return {updatingOrderStatus:true}
+        case ORDER_STATUS_UPDATE_SUCCESS :
+            return{ updatingOrderStatus:false,success: true}
+        case ORDER_STATUS_UPDATE_FAIL:
+            return { error:true} 
+        default:
+            return state
+    }
+}
 

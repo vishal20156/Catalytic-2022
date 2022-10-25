@@ -3,7 +3,7 @@ from http.client import HTTPResponse
 import re
 from django.http import HttpResponse
 from django.shortcuts import render
-
+import pywhatkit as pwk
 import razorpay
 from .models import Order
 from .serializers import OrderSerializer,ProductSerializer, UserSerializer,UserSerializerWithToken, OrderSuccessSerializer
@@ -23,7 +23,8 @@ import os
 from twilio.rest import Client
 from sheet2api import Sheet2APIClient
 import gspread
-
+import keyboard
+import time
 import os.path
 from google.auth.transport.requests import Request
 from google.oauth2.credentials import Credentials
@@ -33,7 +34,7 @@ from googleapiclient.errors import HttpError
 from google.oauth2 import service_account
 
 SCOPES = ['https://www.googleapis.com/auth/spreadsheets']
-SERVICE_ACCOUNT_FILE = 'C:/Users/divya/AppData/Roaming/gspread/service_account.json'
+SERVICE_ACCOUNT_FILE = "C:\\Users\\Acer\\Desktop\\VR\\Priv-master\\CR\\backend-cr\\orders\\api_orders\\service_account.json"
 creds = None
 creds = service_account.Credentials.from_service_account_file(
         SERVICE_ACCOUNT_FILE, scopes=SCOPES)
@@ -66,6 +67,18 @@ def Convert(lst):
 def testing(request):
     return render(request, 'paymentsummary.html', {})
 
+
+status_choices = {
+        1 : 'Not Packed',
+        2 : 'Ready For Shipment',
+        3 : 'Shipped',
+        4 : 'Delivered'
+}
+payment_status_choices = {
+        1 :  'SUCCESS' ,
+        2 : 'FAILURE' ,
+        3 : 'PENDING',
+    }
 
 @api_view(['POST'])
 def registerUser(request):
@@ -114,7 +127,19 @@ def getUserProfile(request):
     serializer = UserSerializer(user,many = False)
     return Response(serializer.data)
     
-
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def getAllOrders(request):
+    user =request.user
+    if not(user.is_authenticated):
+        print("NO")
+    serializer = UserSerializerWithToken(user,many = False)
+    #useremail = user.email
+    #print(user.email)
+    userorders = Order.objects.filter(user=user)
+    #print("FILTER",userorders)
+    srzlr = OrderSerializer(userorders,many=True)
+    return Response(srzlr.data)
 
 
 @api_view(['GET'])
@@ -123,6 +148,9 @@ def getUsers(request):
     users = User.objects.all()
     szlr = UserSerializer(users, many=True)
     return Response(szlr.data)
+
+
+
 
 @api_view(http_method_names=["POST"])
 @permission_classes([IsAuthenticated])
@@ -280,3 +308,34 @@ def delivery_status(request):
         return Response(slzr_order.data,status=status.HTTP_200_OK)
     else:
         return Response({"message":"Bad Request"},status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(['GET'])
+@permission_classes([IsAdminUser])
+def getOrders(request):
+    orders = Order.objects.all()
+    srzlr  = OrderSerializer(orders,many=True)
+    return Response(srzlr.data)
+
+
+
+
+
+@api_view(['PUT'])
+@permission_classes([IsAdminUser])
+def updateOrderStatus(request):
+    data = request.data
+    
+    order_status = int(data['order_status'])
+    order_id = int(data['order_id'])
+    print((order_status,order_id))
+    order_to_be_changed =  Order.objects.get(id=order_id)
+    user_no = extendedUser.objects.get(user=order_to_be_changed.user)
+    order_to_be_changed.order_status = order_status
+    # print(user_no)
+    srzlr = OrderSerializer(order_to_be_changed,many=False)
+    order_to_be_changed.save()
+    pwk.sendwhatmsg_instantly("+91"+str(user_no), "Your order is"+status_choices[order_status], 10, tab_close=True)   
+    # time.sleep(20)
+    # keyboard.press_and_release('ctrl+w')
+    return Response(srzlr.data)

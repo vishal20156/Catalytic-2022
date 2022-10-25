@@ -17,13 +17,42 @@ function PlaceOrderScreen(){
     const navigate = useNavigate();
     const cart= useSelector(state => state.cart)
     const orderCrate = useSelector((state) => state.orderCreate);
-
+    const [ dist, setDist ] = useState(0);
+    const[ ship,setShip] = useState(0);
     const { order, error, success, loading} = orderCrate;
     cart.itemsPrice = cart.cartItems.reduce((acc,item) => acc + item.price * item.qty,0).toFixed(2)
-    cart.shippingPrice = (cart.itemsPrice > 100 ? 0 : 100).toFixed(2)
-    cart.taxPrice = ((cart.itemsPrice) * (8.2) / 100).toFixed(2)
-    cart.totalPrice = (Number(cart.itemsPrice) + Number(cart.shippingPrice) + Number(cart.taxPrice)).toFixed(2)
+  
+    cart.taxPrice = 0
+    cart.totalPrice = (Number(cart.itemsPrice) + Number(ship) + Number(cart.taxPrice)).toFixed(2)
+
+const fetchDistance = () => {
+console.log("Yaha hu")
+const origin = cart.shippingAddress.address+cart.shippingAddress.city+cart.shippingAddress.country+cart.shippingAddress.postalCode
+
+        fetch(`https://api.distancematrix.ai/maps/api/distancematrix/json?origins=Sher%20E%20Punjab%20Colony,%20Andheri%20East,%20Mumbai,%20Maharashtra%20400093,%20India&destinations=${origin}&key=5wOAJxU6DKL3EsVLOgvTZgRcV2PT2
+        `)
+  .then((response) => response.json())
+  .then((data) => setDist(data['rows'][0]['elements'][0]['distance']['value']))
+          //let distance = String(dist
+           if((dist / 1000) > 5) {
+                setShip(10 * (dist / 1000))
+           }
+            else{
+                    cart.shippingPrice = 0
+            }
+
+
+}
+
+useEffect(() => {
+  fetchDistance(); // <-- load dog state on initial render
+});
+console.log(cart.shippingPrice);
     useEffect(() => {
+
+
+
+		
         if (success) {
             console.log("here");
             console.log(order.order_id);
@@ -121,7 +150,7 @@ function PlaceOrderScreen(){
                         <ListGroup.Item>
                             <Row>
                                 <Col>Shipping:</Col>
-                                <Col>Rs. {cart.shippingPrice}</Col>
+                                <Col>Rs. {ship.toFixed(3)}</Col>
                             </Row>
                         </ListGroup.Item>
                         <ListGroup.Item>

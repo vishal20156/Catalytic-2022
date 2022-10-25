@@ -1,0 +1,105 @@
+Date: 25/10/2022
+Time: 17:46
+Phone Number: +917977209512
+Message: Test msg.
+--------------------
+Date: 25/10/2022
+Time: 17:51
+Phone Number: +917977209512
+Message: Test msg.
+--------------------
+Date: 25/10/2022
+Time: 17:54
+Phone Number: +917977209512
+Message: Your order isReady For Shipment
+--------------------
+Date: 25/10/2022
+Time: 17:56
+Phone Number: +917977209512
+Message: Your order isDelivered
+--------------------
+Date: 25/10/2022
+Time: 17:57
+Phone Number: +917977209512
+Message: Your order isShipped
+--------------------
+Date: 25/10/2022
+Time: 17:58
+Phone Number: +917977209512
+Message: Your order isShipped
+--------------------
+Date: 25/10/2022
+Time: 17:58
+Phone Number: +917977209512
+Message: Your order isDelivered
+--------------------
+Date: 25/10/2022
+Time: 17:59
+Phone Number: +917977209512
+Message: Your order isShipped
+--------------------
+Date: 25/10/2022
+Time: 18:0
+Phone Number: +917977209512
+Message: Your order isReady For Shipment
+--------------------
+Date: 25/10/2022
+Time: 18:1
+Phone Number: +917977209512
+Message: Your order isReady For Shipment
+--------------------
+Date: 25/10/2022
+Time: 18:1
+Phone Number: +917977209512
+Message: Your order isDelivered
+--------------------
+Date: 25/10/2022
+Time: 18:2
+Phone Number: +917977209512
+Message: Your order isReady For Shipment
+--------------------
+Date: 25/10/2022
+Time: 18:3
+Phone Number: +917977209512
+Message: Your order isShipped
+--------------------
+Date: 25/10/2022
+Time: 18:4
+Phone Number: +917977209512
+Message: Your order isDelivered
+--------------------
+Date: 25/10/2022
+Time: 18:5
+Phone Number: +917977209512
+Message: Your order isReady For Shipment
+--------------------
+Date: 25/10/2022
+Time: 18:5
+Phone Number: +917977209512
+Message: Your order isShipped
+--------------------
+Date: 25/10/2022
+Time: 18:6
+Phone Number: +917977209512
+Message: Your order isNot Packed
+--------------------
+Date: 25/10/2022
+Time: 18:7
+Phone Number: +917977209512
+Message: Your order isShipped
+--------------------
+Date: 25/10/2022
+Time: 18:8
+Phone Number: +917977209512
+Message: Your order isReady For Shipment
+--------------------
+Date: 25/10/2022
+Time: 18:10
+Phone Number: +917977209512
+Message: Your order is Not Packed
+--------------------
+Date: 25/10/2022
+Time: 18:10
+Phone Number: +917977209512
+Message: Your order isDelivered
+--------------------

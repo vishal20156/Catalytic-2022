@@ -19,7 +19,7 @@ class OrderSerializer(serializers.ModelSerializer):
 class OrderSuccessSerializer(serializers.ModelSerializer):
 	class Meta:
 		model = Order
-		fields = ['order_id']
+		fields = '__all__'
 
 
 class ProductSerializer(serializers.ModelSerializer):
@@ -43,7 +43,7 @@ class UserSerializer(serializers.ModelSerializer):
         return obj.id
 
     def get_isAdmin(self, obj):
-        return obj.is_staff
+        return obj.is_superuser
 
     def get_name(self, obj):
         name = obj.first_name
@@ -62,6 +62,19 @@ class UserSerializerWithToken(UserSerializer):
     class Meta:
         model = User
         fields = ['id', '_id', 'username', 'email', 'name', 'isAdmin', 'token']
+
+    def get__id(self, obj):
+        return obj.id
+
+    def get_isAdmin(self, obj):
+        return obj.is_superuser
+
+    def get_name(self, obj):
+        name = obj.first_name
+        if name == '':
+            name = obj.email
+
+        return name
 
     def get_token(self, obj):
         token = RefreshToken.for_user(obj)

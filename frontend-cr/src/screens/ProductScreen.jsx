@@ -7,7 +7,8 @@ import Spinner from 'react-bootstrap/Spinner';
 import { useState, useEffect } from "react"
 import { useDispatch, useSelector } from 'react-redux'
 import { listProductDetails } from '../actions/productActions'
-
+import Modal from 'react-modal';
+import ModalReact from "../comps/ModalReact";
 
 function ProductScreen({ match }) {
     const baseURL = "http://127.0.0.1:8000"
@@ -58,6 +59,11 @@ function ProductScreen({ match }) {
                                 </ListGroup.Item>
                                 <ListGroup.Item>
                                     Description : {product.description}
+                                </ListGroup.Item>
+
+                                <ListGroup.Item>
+                                    {/* <Button className="btn-success">Get Nutritional Facts</Button> */}
+                                    <ModalReact product = {product.name}/>
                                 </ListGroup.Item>
                             </ListGroup>
                         </Col>

@@ -99,15 +99,10 @@ WSGI_APPLICATION = 'orders.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'postgres',
-        'USER':'postgres',
-        'PASSWORD':'admin',
-        'HOST':'localhost',
-        'PORT':'5432'
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': 'mydatabase',
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
@@ -133,7 +128,7 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
 EMAIL_HOST_USER = 'catalyticrasoiorder@gmail.com'
-EMAIL_HOST_PASSWORD = 'Catalytic01@'
+EMAIL_HOST_PASSWORD = 'npdzeuofholgwcux'
 
 
 # Internationalization

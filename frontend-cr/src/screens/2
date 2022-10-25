@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Form, Button, Row, Col, Container, Table } from "react-bootstrap";
-import { LinkContainer } from 'react-router-bootstrap'
+import { Form, Button, Row, Col, Container } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { getUserDetails, updateUserProfile, getUserOrderDetails} from "../actions/userActions";
 import { useNavigate } from "react-router-dom";
@@ -17,8 +16,8 @@ function ProfileScreen() {
     const [message, setMessage] = useState('')
 
     const dispatch = useDispatch()
-	const orderstatus = {1 : "Not Packed", 2 : "Ready For Shipment", 3 : "Shipped", 4 : "Delivered"}
-    const paystatus = {1 : "Pending",2 : "Failure" , 3 : "Success"}
+
+
     const userDetails = useSelector(state => state.userDetails)
     const { error, loading, user } = userDetails
 
@@ -28,27 +27,31 @@ function ProfileScreen() {
     const userUpdateProfile = useSelector(state => state.userUpdateProfile)
     const { success,updatingStatus } = userUpdateProfile
     
-    const userOrderDetails = useSelector(state => state.OrderList)
+    const userOrderDetails = useSelector(state => state.orderList)
     const {loadingorders,userorders} = userOrderDetails
+    console.log(userorders)
+//    const { error, loading, user } = userDetails
+
     useEffect(() => {
         if (!userInfo) {
             history('/login')
         }
         else{
-		
-            if(!user.name  ){
-                   
+            if(!user.name){
+                dispatch({type:USER_UPDATE_PROFILE_RESET})
+                if(!success){
                     dispatch(getUserDetails())
+                    dispatch(getUserOrderDetails())
+                }
                 
             }
             else{
                 setName(user.name)
                 setEmail(user.email)
-		 dispatch(getUserOrderDetails())
-
             }
         }
     }, [dispatch,history, userInfo,user,success])
+
     const submitHandler = (e) => {
         e.preventDefault()
         if(password != confirmPassword){
@@ -63,7 +66,7 @@ function ProfileScreen() {
   return (
     <Container>
       <Row>
-        <Col md={12}>
+        <Col md={3}>
           <h2>User Profile</h2>
           { updatingStatus ?      
           <div className = "d-flex">
@@ -123,43 +126,9 @@ function ProfileScreen() {
                 </Button>
             </Form>
         </Col>
-        <Col md={14}>
+        <Col md={9}>
           <h2>My Orders</h2>
-	  {userorders!==undefined ? (
-	<Table striped responsive className='table-md table-dark'>
-                                <thead>
-                                    <tr>
-                                        <th>ID</th>
-                                        <th>Order Items</th>
-                                        <th>Total Price</th>
-                                        <th>Order Status</th>
-		  			<th>Payment Status</th>
-                                        <th></th>
-                                    </tr>
-                                </thead>
-
-                                <tbody className>
-                                    {Array.from(userorders).map(order => (
-                                        <tr key={order.order_id}>
-            				<td>{order.order_id}</td>
-					<td>{order.cart.map(ele =>
-					<span>{ele.item_name} &nbsp; </span>
-					)}</td>
-					<td>{order.amount}</td>
-					<td>{orderstatus[order.order_status]}</td>
-					<td>{paystatus[order.payment_status]}</td>  
-					 <td>
-					 <LinkContainer to={`/order/${order.order_id}`}>
-					<Button className='btn-sm'>Details</Button>
-					 </LinkContainer>
-					 </td>
-					    </tr>
-                                    ))}
-                                </tbody>
-                            </Table>
-
-	  )  : "LOADING......"} 
-</Col>
+        </Col>
       </Row>
     </Container>
   );

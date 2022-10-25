@@ -14,5 +14,9 @@ urlpatterns = [
 	path('profile/update/', views.updateUserProfile, name="update_profile"),
 	path('register/', views.registerUser, name="register"),
 	path('users/', views.getUsers, name="getusers"),
-	path('updatespreadsheet/',views.updateSpreadsheet,name="updateSpreadsheet")
+    path('myorders/',views.getAllOrders,name="getorders"),
+	path('getorders/',views.getOrders,name="getordersadin"),
+	path('updatespreadsheet/',views.updateSpreadsheet,name="updateSpreadsheet"),
+	path('updateorder/',views.updateOrderStatus,name="updateOrderStatus")
+
 ]
