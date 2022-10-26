@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 import { useSelector,useDispatch } from "react-redux";
-import { NavDropdown } from "react-bootstrap";
 import { logout } from '../actions/userActions'
 const Header = () => {
 

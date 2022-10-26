@@ -7,10 +7,7 @@ import {
     ORDER_DETAILS_REQUEST,
     ORDER_DETAILS_SUCCESS,
     ORDER_DETAILS_FAIL,
-    ORDER_PAY_REQUEST,
-    ORDER_PAY_SUCCESS,
-    ORDER_PAY_FAIL,
-    ORDER_PAY_RESET,
+
     ORDER_LIST_MY_REQUEST,
     ORDER_LIST_MY_SUCCESS,
     ORDER_LIST_MY_FAIL,
@@ -18,15 +15,12 @@ import {
     ORDER_LIST_REQUEST,
     ORDER_LIST_SUCCESS,
     ORDER_LIST_FAIL,
-    ORDER_DELIVER_REQUEST,
-    ORDER_DELIVER_SUCCESS,
-    ORDER_DELIVER_FAIL,
-    ORDER_DELIVER_RESET,
+
     ORDER_STATUS_UPDATE_REQUEST,
     ORDER_STATUS_UPDATE_SUCCESS,
     ORDER_STATUS_UPDATE_FAIL,
-    
-    
+
+
 } from "../constants/orderConstants";
 
 /* REDUCER USED IN PlaceOrder COMPONENT */
@@ -64,16 +58,14 @@ export const orderDetailsReducer = (
     action
 ) => {
     switch (action.type) {
-       
+
         case ORDER_DETAILS_REQUEST:
-            console.log("in here-2");
             return {
                 ...state,
                 loading: true,
             };
 
         case ORDER_DETAILS_SUCCESS:
-            console.log("in here-1");
             return {
                 loading: false,
                 order: action.payload,
@@ -148,14 +140,14 @@ export const orderListReducer = (state = { orders: [] }, action) => {
 
 
 
-export const orderUpdateReducer = (state = { },action) => {
-    switch(action.type){
-        case ORDER_STATUS_UPDATE_REQUEST :
-            return {updatingOrderStatus:true}
-        case ORDER_STATUS_UPDATE_SUCCESS :
-            return{ updatingOrderStatus:false,success: true}
+export const orderUpdateReducer = (state = {}, action) => {
+    switch (action.type) {
+        case ORDER_STATUS_UPDATE_REQUEST:
+            return { updatingOrderStatus: true }
+        case ORDER_STATUS_UPDATE_SUCCESS:
+            return { updatingOrderStatus: false, success: true }
         case ORDER_STATUS_UPDATE_FAIL:
-            return { error:true} 
+            return { error: true }
         default:
             return state
     }

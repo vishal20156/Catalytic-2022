@@ -5,7 +5,7 @@ import { Row,Col,ListGroup,Image,Form,Button,Card, Container } from "react-boots
 import { addToCart } from "../actions/cartActions"
 import { Navigate, useParams } from "react-router"
 import { removeFromCart } from "../actions/cartActions"
-
+import uuid from 'react-uuid';
 
 const CartScreen = () => {
 const productId = useParams()
@@ -18,9 +18,7 @@ const user = useSelector(state => state.userLogin)
 const cart = useSelector(state => state.cart)
 const { cartItems } = cart
 const navigate = useNavigate()
-
-console.log(cartItems)
-
+console.log(cartItems[0])
 useEffect(() => {
     if (productId.id) {
         
@@ -29,6 +27,7 @@ useEffect(() => {
 }, [dispatch, productId.id, qty])
 
 const removeFromCartHandler = (id) => {
+    console.log(id)
     dispatch(removeFromCart(id))
 }
 const baseURL = "http://127.0.0.1:8000"
@@ -53,8 +52,8 @@ const checkoutHandler = () => {
         ) : (   
                 
                 <ListGroup variant='flush'>
-                    {cartItems.map(item => (
-                        <ListGroup.Item key={item.product}>
+                    {cartItems.map((item,index) => (
+                        <ListGroup.Item key={uuid()}>
                             
                             <Row>
                                 <Col md={2}>
@@ -90,7 +89,7 @@ const checkoutHandler = () => {
                                     <Button
                                         type='button'
                                         variant='light'
-                                        onClick={() => removeFromCartHandler(item.product)}
+                                        onClick={() => removeFromCartHandler(index)}
                                     >
                                         <i className='fas fa-trash'></i>
                                     </Button>

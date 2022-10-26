@@ -1,11 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, {  useEffect } from "react";
 
-/* REACT ROUTER */
-import { Link } from "react-router-dom";
 
-/* REACT BOOTSTRAP */
-import { Row, Col, ListGroup, Image, Card, Button } from "react-bootstrap";
-import axios from "axios";
 
 import "../loeader.css"
 import Spinner from "react-bootstrap/Spinner";
@@ -19,31 +14,18 @@ import { getOrderDetails } from "../actions/orderActions";
 function OrderScreen({ match }) {
   const { id } = useParams();
   const dispatch = useDispatch();
-  const razorpay = {
-    key_id: "rzp_test_nYC3gZzd3MTC9I",
-  };
+
   /* PULLING A PART OF STATE FROM THE ACTUAL STATE IN THE REDUX STORE */
   const orderDetails = useSelector((state) => state.orderDetails);
-  console.log(orderDetails);
   const { order, error, loading } = orderDetails;
 
   const userLogin = useSelector((state) => state.userLogin);
-  const { userInfo } = userLogin;
 
   
 
   useEffect(() => {
     dispatch(getOrderDetails(id));
-    if(!loading){
-      // const name = userInfo.name;
-      // const orderid =order.order_id;
-      // const ordered = order.cart
-      // const paymentmethod = localStorage.getItem("paymentMethod")
-      // const orderamt = order.amount
-      // const orderDate = order.timestamp_created_at
-      // // console.log(userInfo)
-      // writeToSpreadSheet(name,orderid,ordered,paymentmethod,orderamt,orderDate)
-    }
+ 
   }, []);
 
   const block = {

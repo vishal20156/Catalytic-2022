@@ -1,12 +1,9 @@
 import React from "react";
-import ProductData from "../ProductData.js";
-import { useState, useEffect } from 'react'
+import {  useEffect } from 'react'
 import Product from "../comps/Product.jsx";
-import { StateType , useDispatch,useSelector} from 'react-redux'
+import {  useDispatch,useSelector} from 'react-redux'
 import { listProduct } from '../actions/productActions'
 import { getlatlong } from "pincode-lat-long"
-import { getByLabelText } from "@testing-library/dom";
-import haversine from "haversine-distance"
 const HomeScreen = () => {
 
   const dispatch = useDispatch()
@@ -16,58 +13,8 @@ const HomeScreen = () => {
     dispatch(listProduct())
   },[])
   
-  const getSourceCoordinates = (src) => {
-      let { lat, long } = getlatlong(src)
-      let latA = lat
-      let longA = long
-      return { latA, longA }
-  }
- 
-  const getDestinationCoordinates = (dest) => {
-    let { lat, long } = getlatlong(dest)
-    let latB = lat
-    let longB = long
-    return { latB, longB }
-}
+  
 
- const degtoRed = (deg) => {
-    const PI = Math.PI
-    return deg * (PI/180)
- }
-
-
-
-
-
-function haversinef(lat1, lon1, lat2, lon2)
-    {
-        // distance between latitudes
-        // and longitudes
-        let dLat = (lat2 - lat1) * Math.PI / 180.0;
-        let dLon = (lon2 - lon1) * Math.PI / 180.0;
-           
-        // convert to radiansa
-        lat1 = (lat1) * Math.PI / 180.0;
-        lat2 = (lat2) * Math.PI / 180.0;
-         
-        // apply formulae
-        let a = Math.pow(Math.sin(dLat / 2), 2) +
-                   Math.pow(Math.sin(dLon / 2), 2) *
-                   Math.cos(lat1) *
-                   Math.cos(lat2);
-        let rad = 6371;
-        let c = 2 * Math.asin(Math.sqrt(a));
-        return rad * c;
-         
-    }
- 
-const {latA,longA} = getSourceCoordinates(400093)
-const {latB,longB} = getDestinationCoordinates(400020)
-
-
-
-// console.log({latA,longA})
-console.log({latB,longB})
 // const products = []
   return (
     <>

@@ -14,7 +14,7 @@ import {
   USER_UPDATE_PROFILE_REQUEST,
   USER_UPDATE_PROFILE_SUCCESS,
   USER_UPDATE_PROFILE_FAIL,
-  USER_UPDATE_PROFILE_RESET,
+
          
 USER_ORDER_DETAILS_REQUEST, 
 USER_ORDER_DETAILS_SUCCESS,
@@ -117,7 +117,6 @@ export const getUserDetails = (id) => async (dispatch, getState) => {
     const {
       userLogin: { userInfo },
     } = getState();
-console.log(`${userInfo.token}`)
     /* MAKE GET REQUEST TO GET BACK THE USER DATA */
     const config = {
       headers: {
@@ -208,7 +207,6 @@ export const getUserOrderDetails = (id) => async (dispatch, getState) => {
     const {
       userLogin: { userInfo },
     } = getState();
-console.log(`${userInfo.token}`)
     /* MAKE GET REQUEST TO GET BACK THE USER DATA */
     const config = {
       headers: {

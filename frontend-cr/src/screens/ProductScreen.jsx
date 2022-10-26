@@ -1,5 +1,4 @@
-import { Link } from "react-router-dom";
-import { Row, Col, Image, ListGroup, Button, Card, ListGroupItem, Form } from "react-bootstrap";
+import { Row, Col, ListGroup, Button, Card, ListGroupItem, Form } from "react-bootstrap";
 // import ProductData from "../ProductData";
 import { useParams } from "react-router";
 import { useNavigate } from "react-router-dom";
@@ -7,7 +6,6 @@ import Spinner from 'react-bootstrap/Spinner';
 import { useState, useEffect } from "react"
 import { useDispatch, useSelector } from 'react-redux'
 import { listProductDetails } from '../actions/productActions'
-import Modal from 'react-modal';
 import ModalReact from "../comps/ModalReact";
 
 function ProductScreen({ match }) {
@@ -32,7 +30,6 @@ function ProductScreen({ match }) {
 
 
     const addToCartMethod = () => {
-        console.log("I am clicked: ", id)
         navigate(`/cart/${id}?qty=${qty}`)
     }
 

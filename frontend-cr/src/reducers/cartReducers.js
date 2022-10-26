@@ -33,7 +33,7 @@ export const cartReducer = (state = { cartItems: [], shippingAddress: {} }, acti
         case CART_REMOVE_ITEM:
             return {
                 ...state,
-                cartItems: state.cartItems.filter((x) => x.product !== action.payload)
+                cartItems: state.cartItems.filter((x,idx) => idx !== action.payload)
             }
 
         case CART_SAVE_SHIPPING_ADDRESS:

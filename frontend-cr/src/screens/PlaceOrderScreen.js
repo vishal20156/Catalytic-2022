@@ -5,11 +5,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { Message } from "../comps/Message";
 import { useNavigate,Link} from "react-router-dom";
 import { CheckoutSteps } from "../comps/CheckoutSteps"
-import {setPaymentState,setShippingState} from "../actions/cartActions";
 import { createOrder } from "../actions/orderActions";
 import { ORDER_CREATE_RESET } from "../constants/orderConstants";
 import Spinner from 'react-bootstrap/Spinner';
-
+import uuid from 'react-uuid'
 
 function PlaceOrderScreen(){
     const baseURL = "http://127.0.0.1:8000"
@@ -26,7 +25,6 @@ function PlaceOrderScreen(){
     cart.totalPrice = (Number(cart.itemsPrice) + Number(ship) + Number(cart.taxPrice)).toFixed(2)
 
 const fetchDistance = () => {
-console.log("Yaha hu")
 const origin = cart.shippingAddress.address+cart.shippingAddress.city+cart.shippingAddress.country+cart.shippingAddress.postalCode
 
         fetch(`https://api.distancematrix.ai/maps/api/distancematrix/json?origins=Sher%20E%20Punjab%20Colony,%20Andheri%20East,%20Mumbai,%20Maharashtra%20400093,%20India&destinations=${origin}&key=5wOAJxU6DKL3EsVLOgvTZgRcV2PT2
@@ -47,15 +45,12 @@ const origin = cart.shippingAddress.address+cart.shippingAddress.city+cart.shipp
 useEffect(() => {
   fetchDistance(); // <-- load dog state on initial render
 });
-console.log(cart.shippingPrice);
     useEffect(() => {
 
 
 
 		
         if (success) {
-            console.log("here");
-            console.log(order.order_id);
           navigate(`/order/${order.order_id}/`);
 
           dispatch({
@@ -114,7 +109,7 @@ console.log(cart.shippingPrice);
                             (
                                 <ListGroup variant = "flush">
                                     {cart.cartItems.map((item,index) => (
-                                        <ListGroup.Item>
+                                        <ListGroup.Item key = {uuid()}>
                                             <Row>
                                                 <Col md = {1}>
                                                     <Image src =  {baseURL + item.image} alt = {item.name} fluid rounded/>

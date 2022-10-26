@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
 import { Form, Button, Row, Col, Container, Table } from "react-bootstrap";
 import { LinkContainer } from 'react-router-bootstrap'
 import { useDispatch, useSelector } from "react-redux";
 import { getUserDetails, updateUserProfile, getUserOrderDetails} from "../actions/userActions";
 import { useNavigate } from "react-router-dom";
 import { Message } from "../comps/Message";
-import {USER_UPDATE_PROFILE_RESET} from '../constants/userConstants'
 import Spinner from 'react-bootstrap/Spinner';
+import uuid from 'react-uuid'
 function ProfileScreen() {
   const history = useNavigate();
   const [name,setName] = useState('')
@@ -51,7 +50,7 @@ function ProfileScreen() {
     }, [dispatch,history, userInfo,user,success])
     const submitHandler = (e) => {
         e.preventDefault()
-        if(password != confirmPassword){
+        if(password !== confirmPassword){
             setMessage("Passwords do not match")
         }
         else{
@@ -140,10 +139,10 @@ function ProfileScreen() {
 
                                 <tbody className>
                                     {Array.from(userorders).map(order => (
-                                        <tr key={order.order_id}>
+                                        <tr key={order.id}>
             				<td>{order.order_id}</td>
 					<td>{order.cart.map(ele =>
-					<span>{ele.item_name} &nbsp; </span>
+					<span key = {uuid()}>{ele.item_name} &nbsp; </span>
 					)}</td>
 					<td>{order.amount}</td>
 					<td>{orderstatus[order.order_status]}</td>

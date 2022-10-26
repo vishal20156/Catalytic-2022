@@ -5,8 +5,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { getOrders } from '../actions/orderActions'
 import Modal from 'react-bootstrap/Modal';
-import Dropdown from 'react-bootstrap/Dropdown';
-import DropdownItem from 'react-bootstrap/esm/DropdownItem'
+
 import Form from 'react-bootstrap/Form';
 import { updateOrderStatusAdmin } from '../actions/orderActions'
 
