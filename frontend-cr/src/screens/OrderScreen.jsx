@@ -69,6 +69,8 @@ function OrderScreen({ match }) {
           <div>&nbsp;
           <h2>Congratulations!we have recieved your order,below are the order details</h2>
 
+          
+
         
           </div>
 

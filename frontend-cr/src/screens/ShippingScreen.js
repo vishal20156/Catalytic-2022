@@ -61,6 +61,8 @@ function ShippingScreen() {
                     <Form.Control
                         required
                         type='text'
+                        maxlength="6"
+                        pattern="[0-9]{6}"
                         placeholder='Enter postal code'
                         value={postalCode ? postalCode : ''}
                         onChange={(e) => setPostalCode(e.target.value)}
@@ -80,7 +82,7 @@ function ShippingScreen() {
                     </Form.Control>
                 </Form.Group>
 
-                <Button type='submit' variant='primary'>
+                <Button type='submit' className="mb-4 mt-4" variant='primary'>
                     Continue
                 </Button>
             </Form>

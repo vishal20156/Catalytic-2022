@@ -30,6 +30,7 @@ function OrderListScreen() {
     const handleUpdateStatus = () => {
         if (userInfo && userInfo.isAdmin) {
             dispatch(updateOrderStatusAdmin(orderUpdateId, changedStatus))
+                
             setShow(false);
         }
     }
@@ -92,7 +93,7 @@ function OrderListScreen() {
             history('/login')
         }
 
-    }, [dispatch, history, userInfo, success])
+    }, [dispatch, history, userInfo, success,updatingOrderStatus])
 
 
     return (
@@ -162,7 +163,7 @@ function OrderListScreen() {
 
                                 <tbody>
                                     {
-                                        ordersstate.length > 0 ? ordersstate.map(order => (
+                                        ordersstate && ordersstate.length > 0? ordersstate.map(order => (
                                             <tr key={order.id}>
                                                 <td>{order.id}</td>
                                                 <td>{order.user && order.user.first_name}</td>

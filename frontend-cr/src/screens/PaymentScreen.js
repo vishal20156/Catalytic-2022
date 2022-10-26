@@ -35,6 +35,7 @@ function PaymentScreen() {
                     <Form.Label as='legend'>Select Method</Form.Label>
                     <Col>
                         <Form.Check
+                            required
                             type='radio'
                             label='Cash on Delivery'
                             id='cod'

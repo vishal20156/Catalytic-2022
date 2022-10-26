@@ -2,7 +2,7 @@ const Footer = () => {
   return (
     <>
       <footer>
-        <div className="wrap-container">
+        <div className="wrap-container me-4">
           <div className="wrapper-row">
             <div className="footer-col-2">
 
