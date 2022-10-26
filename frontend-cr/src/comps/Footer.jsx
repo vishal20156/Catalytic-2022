@@ -1,7 +1,8 @@
 const Footer = () => {
+  const footerstyles = {marginTop:"180px"}
   return (
     <>
-      <footer>
+      <footer style={footerstyles}>
         <div className="wrap-container me-4">
           <div className="wrapper-row">
             <div className="footer-col-2">

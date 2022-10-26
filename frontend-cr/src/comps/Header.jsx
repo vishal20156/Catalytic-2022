@@ -1,6 +1,13 @@
 import { Link } from "react-router-dom";
-import { useSelector,useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { logout } from '../actions/userActions'
+
+import Container from 'react-bootstrap/Container';
+import Nav from 'react-bootstrap/Nav';
+import Navbar from 'react-bootstrap/Navbar';
+import NavDropdown from 'react-bootstrap/NavDropdown';
+import { LinkContainer } from 'react-router-bootstrap'
+
 const Header = () => {
 
   const userLogin = useSelector(state => state.userLogin)
@@ -9,56 +16,68 @@ const Header = () => {
   const logoutHandler = () => {
     dispatch(logout())
   }
-    return(
-         <>
-      <div className="wrap-container">
-        <div className="navbar">
-          <div className="logo">
-            <span className="brand-title text-uppercase">Catalytic Rasoi</span>
-          </div>
+  return (
+    <>
 
-          <nav>
-            <ul>
-              <li>
-                <Link to = "/home">Home</Link>
-              </li>
-              <li>
-                   <a href = "#">Products</a>
-              </li>
-              <li>
-                    <a href = "#">About us</a>
-              </li>
-
-
+      <Navbar bg="light" expand="lg">
+        <Container>
+          <Navbar.Brand href="#home" className="text-success">Catalytic Rasoi</Navbar.Brand>
+          <Navbar.Toggle aria-controls="basic-navbar-nav" />
+          <Navbar.Collapse id="basic-navbar-nav">
+            <Nav className="ms-auto text-secondary">
+              <Nav.Link href="/">Home</Nav.Link>
+              <Nav.Link href="/#products">Products</Nav.Link>
+              <Nav.Link href="#link">About</Nav.Link>
               {userInfo ? (
                 <>
-               <li><Link to = "profile/">My Profile</Link></li>
-               
-               <li onClick = {logoutHandler}>Logout</li>
-               </>
+                  <Nav.Link><Link to="profile/">My Profile</Link></Nav.Link>
+
+                  <Nav.Link onClick={logoutHandler}>Logout</Nav.Link>
+                </>
               ) : (
 
-                <li>
-                <Link to="/login" className="btn-custom">
-                  Login
-                </Link>
-              </li>
-              )} 
-              
-            
-              <li>
-                    <Link to="/cart" className="btn-custom">
+                <Nav.Link>
+                  <Link to="/login" className="btn-custom">
+                    Login
+                  </Link>
+                </Nav.Link>
+
+              )}
+
+              <Nav.Link>
+                <Link to="/cart" className="btn-custom">
                   Cart
                 </Link>
-               
-              </li>
-            </ul>
-          </nav>
-        </div>
-      </div>
-      
+
+              </Nav.Link>
+
+              {userInfo && userInfo.isAdmin && (
+                <NavDropdown title='Admin' id='adminmenue'>
+                  <LinkContainer to='/admin/userlist'>
+                    <NavDropdown.Item>Users</NavDropdown.Item>
+                  </LinkContainer>
+
+                  {/* <LinkContainer to='/admin/productlist'>
+                    <NavDropdown.Item>Products</NavDropdown.Item>
+                  </LinkContainer> */}
+
+                  <LinkContainer to='/admin/orderlist'>
+                    <NavDropdown.Item>Orders</NavDropdown.Item>
+                  </LinkContainer>
+
+                </NavDropdown>
+              )}
+
+            </Nav>
+          </Navbar.Collapse>
+        </Container>
+      </Navbar>
+
+
+
+
     </>
-    )
+  )
 }
 
 
