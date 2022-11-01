@@ -5,6 +5,10 @@ import{
     PRODUCT_DETAILS_REQUEST,
     PRODUCT_DETAILS_SUCCESS,
     PRODUCT_DETAILS_FAIL,
+    
+    CAT_LIST_REQUEST,
+    CAT_LIST_SUCCESS,
+    CAT_LIST_FAIL,
 } from '../constants/productConstants'
 export const productListReducer = (state = {products:[]},action) => {
     switch(action.type){
@@ -14,6 +18,20 @@ export const productListReducer = (state = {products:[]},action) => {
             return{ loading:false,products:action.payload }
         case PRODUCT_LIST_FAIL:
             return { loading:false,error:action.payload} 
+        default:
+            return state
+    }
+}
+
+
+export const catListReducer = (state = {category:[]},action) => {
+    switch(action.type){
+        case CAT_LIST_REQUEST :
+            return {loadingcat:true,category:[]}
+        case CAT_LIST_SUCCESS :
+            return{ loadingcat:false,category:action.payload }
+        case CAT_LIST_FAIL:
+            return { loadingcat:false,error:action.payload} 
         default:
             return state
     }

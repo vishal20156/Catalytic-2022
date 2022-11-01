@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect,useRef } from "react";
 import {  Row,Col,ListGroup,Image,Card,Button, Container } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { Message } from "../comps/Message";
@@ -14,13 +14,14 @@ function PlaceOrderScreen(){
     const baseURL = "http://127.0.0.1:8000"
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const btn = useRef()
     const cart= useSelector(state => state.cart)
     const orderCrate = useSelector((state) => state.orderCreate);
     const [ dist, setDist ] = useState(0);
     const[ ship,setShip] = useState(0);
     const { order, error, success, loading} = orderCrate;
     cart.itemsPrice = cart.cartItems.reduce((acc,item) => acc + item.price * item.qty,0).toFixed(2)
-  
+    const [api,setApi] = useState(true);
     cart.taxPrice = 0
     cart.totalPrice = (Number(cart.itemsPrice) + Number(ship) + Number(cart.taxPrice)).toFixed(2)
 
@@ -34,6 +35,8 @@ const origin = cart.shippingAddress.address+cart.shippingAddress.city+cart.shipp
           //let distance = String(dist
            if((dist / 1000) > 5) {
                 setShip(10 * (dist / 1000))
+                setApi(false);
+
            }
             else{
                     cart.shippingPrice = 0
@@ -164,8 +167,9 @@ useEffect(() => {
                         <ListGroup.Item>
                             <Button
                             type = "button"
+                            ref={btn}
                             className = "btn btn-block"
-                            disabled={cart.cartItems === 0}
+                            disabled={api}
                             onClick = {placeOrder}
                             >Place my order</Button>
                         </ListGroup.Item>

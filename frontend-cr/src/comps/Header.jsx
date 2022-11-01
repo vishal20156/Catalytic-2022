@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { logout } from '../actions/userActions'
-
+import Badge from 'react-bootstrap/Badge';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
@@ -57,9 +57,9 @@ const Header = () => {
                     <NavDropdown.Item>Users</NavDropdown.Item>
                   </LinkContainer>
 
-                  {/* <LinkContainer to='/admin/productlist'>
-                    <NavDropdown.Item>Products</NavDropdown.Item>
-                  </LinkContainer> */}
+                   <LinkContainer to='/admin/productlist'>
+                    <NavDropdown.Item disabled>Products <Badge pill bg="warning">Coming soon</Badge> </NavDropdown.Item>
+                  </LinkContainer>
 
                   <LinkContainer to='/admin/orderlist'>
                     <NavDropdown.Item>Orders</NavDropdown.Item>

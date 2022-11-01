@@ -5,12 +5,12 @@ import { Row,Col,ListGroup,Image,Form,Button,Card, Container } from "react-boots
 import { addToCart } from "../actions/cartActions"
 import { Navigate, useParams } from "react-router"
 import { removeFromCart } from "../actions/cartActions"
-import uuid from 'react-uuid';
+
 
 const CartScreen = () => {
-const productId = useParams()
+let productId = useParams()
 // alert(productId.id)
-const qty = window.location.search ? Number(window.location.search.split('=')[1]) : 1
+let qty = window.location.search ? Number(window.location.search.split('=')[1]) : 1
 
 const dispatch = useDispatch()
 const user = useSelector(state => state.userLogin)
@@ -18,21 +18,31 @@ const user = useSelector(state => state.userLogin)
 const cart = useSelector(state => state.cart)
 const { cartItems } = cart
 const navigate = useNavigate()
-console.log(cartItems[0])
+
+console.log(cartItems)
+
 useEffect(() => {
     if (productId.id) {
         
         dispatch(addToCart(productId.id, qty))
+        setTimeout(() => {
+            window.history.replaceState(null, null, window.location.pathname);
+
+        }, 1000);
     }
-}, [dispatch, productId.id, qty])
+}, [dispatch])
 
 const removeFromCartHandler = (id) => {
-    console.log(id)
     dispatch(removeFromCart(id))
 }
 const baseURL = "http://127.0.0.1:8000"
 const checkoutHandler = () => {
-  
+        productId.id=null
+        qty=null
+        window.history.replaceState(null, null, window.location.pathname);
+        if(!qty){
+            navigate('/')
+        }
         if(!user.userInfo){
             navigate('/login')
         }   
@@ -53,7 +63,7 @@ const checkoutHandler = () => {
                 
                 <ListGroup variant='flush'>
                     {cartItems.map((item,index) => (
-                        <ListGroup.Item key={uuid()}>
+                        <ListGroup.Item key={item.product}>
                             
                             <Row>
                                 <Col md={2}>
@@ -64,7 +74,7 @@ const checkoutHandler = () => {
                                 </Col>
 
                                 <Col md={2}>
-                                    ${item.price}
+                                    Rs. {item.price}
                                 </Col>
 
                                 <Col md={3}>
@@ -107,7 +117,7 @@ const checkoutHandler = () => {
             <ListGroup variant='flush'>
                 <ListGroup.Item>
                     <h2>Subtotal ({cartItems.reduce((acc, item) => acc + item.qty, 0)}) items</h2>
-                    ${cartItems.reduce((acc, item) => acc + item.qty * item.price, 0).toFixed(2)}
+                    Rs. {cartItems.reduce((acc, item) => acc + item.qty * item.price, 0).toFixed(2)}
                 </ListGroup.Item>
             </ListGroup>
 
@@ -126,6 +136,9 @@ const checkoutHandler = () => {
         </Card>
     </Col>
 </Row>
+<a className = "btn bg-dark text-white" href = "/#products">&larr;  Add more items </a>
+
+            
 </Container>
    )
 }

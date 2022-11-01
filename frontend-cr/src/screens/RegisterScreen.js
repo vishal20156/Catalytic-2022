@@ -48,7 +48,7 @@ function RegisterScreen(){
             <Form onSubmit = {submitHandler}>
                 
             <Form.Group controlId='name'>
-                    <Form.Label>Email Address</Form.Label>
+                    <Form.Label>Name</Form.Label>
                     <Form.Control
                     required
                         type='text'

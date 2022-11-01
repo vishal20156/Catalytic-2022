@@ -6,11 +6,8 @@ from .serializers import CategorySerializer, ProductSerializer, ImageUploadForm
 from rest_framework.decorators import api_view
 
 
-@api_view(http_method_names=["GET", "POST"])
+@api_view(http_method_names=["GET"])
 def categories(request):
-	if request.method == "POST":
-		new_cat = Category.objects.create(name=request.data["category_name"])
-		return Response(new_cat, status=200)
 	categories_lst = Category.objects.all()
 	srlz = CategorySerializer(categories_lst, many=True)
 	return Response(srlz.data)

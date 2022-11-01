@@ -1,13 +1,17 @@
 import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
+import { compose } from 'redux';
 
 function ModalReact({ product }) {
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-  const pd = `/Images/${product}.png`
+  const productImage = product+'cmp';
+  
+  const pd = `/Images/Compare/${productImage}.png`
+  console.log(pd);
   return (
     <>
       <Button variant="primary" onClick={handleShow}>

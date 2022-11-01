@@ -19,10 +19,12 @@ function ProductScreen({ match }) {
     const dispatch = useDispatch()
     const productDetails = useSelector(state => state.productDetails)
     const { loading, product } = productDetails
-
+    const [ currentProduct,setCurrentProduct ]= useState('')
+    console.log(currentProduct)
 
     useEffect(() => {
         dispatch(listProductDetails(id))
+
 
     }, [])
 
@@ -43,10 +45,10 @@ function ProductScreen({ match }) {
             </div> : <div>
                 <div className="container my-5">
                     <Row>
-                        <Col md={6}>
+                        <Col md={5}>
                         <img src = {baseURL + product.image} className = "jqzoom" height = "420"/>
                         </Col>
-                        <Col md={3}>
+                        <Col md={5}>
                             <ListGroup variant="flush">
                                 <ListGroup.Item>
                                     <h3>{product.name}</h3>
@@ -58,13 +60,13 @@ function ProductScreen({ match }) {
                                     Description : {product.description}
                                 </ListGroup.Item>
 
-                                <ListGroup.Item>
+                                <ListGroup.Item className="animate__animated animate__shakeY">
                                     {/* <Button className="btn-success">Get Nutritional Facts</Button> */}
-                                    <ModalReact product = {product.name}/>
+                                   { product.category == 1 ? <ModalReact product = {product.name}/> : ''} 
                                 </ListGroup.Item>
                             </ListGroup>
                         </Col>
-                        <Col md={3}>
+                        <Col md={2}>
 
                             <Card>
                                 <ListGroup variant="flush">

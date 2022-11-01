@@ -1,24 +1,47 @@
 import React from "react";
-import {  useEffect } from 'react'
+import { useEffect } from 'react'
 import Product from "../comps/Product.jsx";
-import {  useDispatch,useSelector} from 'react-redux'
-import { listProduct } from '../actions/productActions'
+import { ReactReduxContext, useDispatch, useSelector } from 'react-redux'
+import { listProduct, listCat } from '../actions/productActions'
 import { getlatlong } from "pincode-lat-long"
 const HomeScreen = () => {
 
   const dispatch = useDispatch()
-  const productList = useSelector(state => state.productList);
-  const { loading, products} = productList
-  useEffect(()=>{
-    dispatch(listProduct())
-  },[])
-  
-  
+  const productList = useSelector(state => state.productList)
 
-// const products = []
+  const { loading, products } = productList
+  const category = { 1: 'Box of Happiness',2:'Mini Hampers'}
+  const ids = [...Object.keys(category)]
+  const styleTitle= { flex : "0 0 100%"}
+
+  
+    
+  // useEffect(() => {
+
+  //   dispatch(listCat())
+
+
+
+  // }, [])
+  useEffect(() => {
+
+    dispatch(listProduct())
+
+
+
+  }, [])
+
+
+
+
+
+  // const products = []
   return (
     <>
       <header>
+        {
+
+        }
         <div className="wrapper-row">
           <div className="wrapper-col-1">
             <h1 className="slide-animation animate__animated animate__fadeIn animate__slow	3s">
@@ -105,16 +128,30 @@ const HomeScreen = () => {
           Products
         </h2>
         
-        <div className="wrapper-row">
-          {products.map((product) => (
-            
-            <div key={product.id} className="wrapper-col-4">
-        
-              <Product key={product.id} product={product} category = {product.category} />
-            </div>
-          ))}
-        </div>
+
+
+        {ids.map((id) => {
+          return (
+            <div className="wrapper-row">
+              <div className="text-center mb-4"style={styleTitle}>
+              <h4>{category[id]}</h4>         
+                </div>
+                { products.filter(product => Number(product.category) == id).map((ele) => {
+                  return( <div key={ele.id} className="wrapper-col-4">
+
+                   <Product key={ele.id} product={ele} category={ele.category} />
+                  
+              </div>
+                 )
+                })}
+              </div>
+
+
+          )
+        })}
+
       </div>
+
     </>
   );
 };
